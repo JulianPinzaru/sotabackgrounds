@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer id="main-tray" app clipped :value="isTrayOpened" width="280px">
+	<v-navigation-drawer id="secondary-tray" app clipped :value="isTrayOpened" right width="280px">
 		<v-list>
 			<v-list-group
 				:value="isGeneratedImagesOpened"
@@ -7,8 +7,9 @@
 				<template v-slot:activator>
 					<v-list-item-title>Generated Images</v-list-item-title>
 				</template>
-				<p v-for="i in 100" :key="i" class="mx-6"> some image goes here</p>
-
+				<div v-for="i in 10" :key="i" class="mx-6">
+					<img class="stored-image" :src="require('@/assets/test-gen-bg/' + i + '.png')" />
+				</div>
 			</v-list-group>
 
 			<v-divider />
@@ -26,7 +27,7 @@
 </template>
 <script>
 	export default {
-		name: 'MainTray',
+		name: 'SecondaryTray',
 		data () {
 			return {
 				isTrayOpened: true,
@@ -47,9 +48,16 @@
 	};
 </script>
 <style lang="scss">
-	#main-tray {
+	#secondary-tray {
 		& > div {
 			@include soft-scroll($width: 0.5, $color: map-get($blue-grey, 'lighten-4'));
+		}
+
+		.stored-image {
+			object-position: center;
+			object-fit: cover;
+			max-width: 100%;
+			max-width: 120px;
 		}
 	}
 </style>

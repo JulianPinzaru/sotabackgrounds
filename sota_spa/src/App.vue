@@ -2,6 +2,7 @@
 	<v-app>
 		<main-app-bar />
 		<main-tray />
+		<secondary-tray />
 
 		<v-main id="app-content">
 			<router-view/>
@@ -12,11 +13,13 @@
 <script>
 	import MainAppBar from '@c/MainAppBar.vue';
 	import MainTray from '@c/MainTray.vue';
+	import SecondaryTray from '@c/SecondaryTray.vue';
 	export default {
 		name: 'App',
 		components: {
 			MainAppBar,
-			MainTray
+			MainTray,
+			SecondaryTray
 		},
 		data: () => ({
 			//

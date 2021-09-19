@@ -6,6 +6,7 @@
 		dark
 		flat
 		clipped-left
+		clipped-right
 		short
 		dense
 		max-height="32px"

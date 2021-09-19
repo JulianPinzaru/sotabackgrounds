@@ -1,0 +1,27 @@
+@import '~vuetify/src/styles/styles.sass';
+
+@mixin soft-scroll($width: 0.5, $color: null) {
+	$scroll-bg: map-get($blue-grey, 'lighten-2') !default;	
+	@if ($color) {
+		$scroll-bg: $color;
+	}	
+
+	&::-webkit-scrollbar-track {
+		background: white;
+	}
+
+	&::-webkit-scrollbar {
+		width: #{$width}rem;
+		background: white;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: white;
+	}
+
+	&:active, &:focus, &:hover {
+		&::-webkit-scrollbar-thumb {
+			background: transparentize($scroll-bg, .4);
+		}
+	}
+}
