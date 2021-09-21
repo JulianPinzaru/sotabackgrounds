@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'image_generator'
+    'image_generator',
+    'inference'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,22 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import pathlib
+import sys
+sys.path.insert(1, 'inference')  # insert at 1, 0 is the script path (or '' in REPL)
+
+import torch
+from inference import dnnlib
+from inference import legacy
+
+MODEL_PATH = pathlib.Path(
+    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-001280.pkl")
+
+network_pkl = str(MODEL_PATH)
+print('Loading networks from "%s"...' % MODEL_PATH)
+DEVICE = torch.device('cuda')
+
+f = dnnlib.util.open_url(network_pkl)
+BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
+f.close()
