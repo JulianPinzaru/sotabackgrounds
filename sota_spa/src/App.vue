@@ -5,7 +5,9 @@
 		<secondary-tray />
 
 		<v-main id="app-content">
-			<router-view/>
+			<transition name="fade" appear mode="out-in">
+				<router-view/>
+			</transition>
 		</v-main>
 	</v-app>
 </template>

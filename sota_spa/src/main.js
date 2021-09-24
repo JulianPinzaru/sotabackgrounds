@@ -3,10 +3,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
+import axios_instance from './api.service';
 
 import '@/styles/main.scss';
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$http = axios_instance;
+Vue.prototype.axios = axios_instance;
 
 new Vue({
 	router,

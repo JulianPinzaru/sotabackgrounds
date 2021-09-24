@@ -29,7 +29,17 @@ module.exports = {
 				return options;
 			});
 		}
-	}
+	},
+	// devServer: {
+	// 	proxy: {
+	// 		'/model/': {
+	// 			target: 'http://localhost:8000',
+	// 			ws: true,
+	// 			changeOrigin: true,
+	// 			logLevel: 'debug',
+	// 		}
+	// 	}
+	// }
 };
 
 function addStyleResource (rule) {

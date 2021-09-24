@@ -1,20 +1,44 @@
 <template>
-	<v-container>
-		<panel-area />
-		<image-area />
+	<v-container fluid>
+		<image-area :image="image" />
+		<v-btn primary @click="generate">Generate</v-btn>
 	</v-container>
 </template>
 
 <script>
-	import PanelArea from '../components/PanelArea.vue';
 	import ImageArea from '../components/ImageArea.vue';
 
 	export default {
 		name: 'Dashboard',
 
 		components: {
-			PanelArea,
 			ImageArea
+		},
+
+		data () {
+			return {
+				image: null,
+				requestParameters: {
+					network: 'universe_generator',
+					seeds: null,
+					truncation_psi: 0.4,
+					class_idx: null,
+					noise_mode: 'random'
+				}
+			};
+		},
+		mounted () {
+			this.axios.get('model/').then((response) => {
+				console.log(response.data);
+			});
+		},
+
+		methods: {
+			generate () {
+				this.axios.post('model/', this.requestParameters).then(response => {
+					this.image = response.data.image;
+				});
+			}
 		}
 	};
 </script>

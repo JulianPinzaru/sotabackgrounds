@@ -17,8 +17,6 @@ class call_model(APIView):
             params = request.GET.get('sentence')
 
             G = settings.BACKGROUNDS_MODEL
-
-            print('after import')
             response = {'asd': 123}
             # predict method used to get the prediction
             # response = ImageGeneratorConfig.predictor.predict(sentence)
@@ -35,15 +33,10 @@ class call_model(APIView):
             noise_mode = request.data.get('noise_mode')
             class_idx = request.data.get('class_idx')
 
-            print(seeds)
-            print(truncation_psi)
-            print(noise_mode)
-            print(class_idx)
-
             DEVICE = settings.DEVICE
             GENERATOR = settings.BACKGROUNDS_MODEL
 
-            img_bytes = generate_images(
+            img_base64_str = generate_images(
                 device=DEVICE,
                 generator=GENERATOR,
                 process='image',
@@ -52,7 +45,5 @@ class call_model(APIView):
                 noise_mode=noise_mode,  # random , None
                 outdir='out',
                 class_idx=None)
-            img_base64 = bytes("data:image/jpeg;base64,", encoding='utf-8') + img_bytes
-            response = {'image': img_base64.decode('utf-8')}
-
+            response = {'image': img_base64_str}
             return JsonResponse(response, status=200)
