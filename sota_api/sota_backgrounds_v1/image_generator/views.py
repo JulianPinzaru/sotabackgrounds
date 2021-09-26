@@ -44,6 +44,6 @@ class call_model(APIView):
                 truncation_psi=truncation_psi,
                 noise_mode=noise_mode,  # random , None
                 outdir='out',
-                class_idx=None)
+                class_idx=class_idx)
             response = {'image': img_base64_str}
             return JsonResponse(response, status=200)

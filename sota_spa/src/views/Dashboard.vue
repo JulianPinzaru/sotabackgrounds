@@ -21,8 +21,9 @@
 				requestParameters: {
 					network: 'universe_generator',
 					seeds: null,
-					truncation_psi: 0.4,
-					class_idx: null,
+					truncation_psi: -0.2,
+					// class_idx: null,
+					class_idx: 5,
 					noise_mode: 'random'
 				}
 			};

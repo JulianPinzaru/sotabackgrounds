@@ -35,5 +35,6 @@ db.sqlite3
 
 # Ignore huge model networks files
 /sota_backgrounds_v1/inference/networks/universe1024/
+/sota_backgrounds_v1/inference/networks/
 /sota_backgrounds_v1/inference/out/
 /sota_backgrounds_v1/out/

@@ -221,7 +221,11 @@ from inference import dnnlib
 from inference import legacy
 
 MODEL_PATH = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-001280.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/backgrounds1024/network-snapshot-003520.pkl")
+# MODEL_PATH = pathlib.Path(
+#     "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-002112.pkl")
+# MODEL_PATH = pathlib.Path(
+#     "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-001280.pkl")
 
 network_pkl = str(MODEL_PATH)
 print('Loading networks from "%s"...' % MODEL_PATH)
