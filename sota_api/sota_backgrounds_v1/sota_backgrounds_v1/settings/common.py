@@ -214,23 +214,34 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import pathlib
 import sys
-sys.path.insert(1, 'inference')  # insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/')  # insert at 1, 0 is the script path (or '' in REPL)
 
 import torch
-from inference import dnnlib
-from inference import legacy
+import dnnlib
+import legacy
+import training.augment
 
-MODEL_PATH = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/backgrounds1024/network-snapshot-003520.pkl")
+
 # MODEL_PATH = pathlib.Path(
 #     "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-002112.pkl")
 # MODEL_PATH = pathlib.Path(
 #     "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-001280.pkl")
 
-network_pkl = str(MODEL_PATH)
-print('Loading networks from "%s"...' % MODEL_PATH)
-DEVICE = torch.device('cuda')
+MODEL_PATH_BACKGROUNDS = pathlib.Path(
+    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/backgrounds1024/network-snapshot-003520.pkl")
 
-f = dnnlib.util.open_url(network_pkl)
+network_pkl_backgrounds = str(MODEL_PATH_BACKGROUNDS)
+print('Loading networks from "%s"...' % network_pkl_backgrounds)
+DEVICE = torch.device('cuda')
+f = dnnlib.util.open_url(network_pkl_backgrounds)
 BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
+f.close()
+
+MODEL_PATH_UNIVERSE = pathlib.Path(
+    "/home/weex/repos/www/sota-backgrounds/sota_api/sota_backgrounds_v1/inference/networks/univervse1024/network-snapshot-000288.pkl")
+network_pkl_universe = str(MODEL_PATH_UNIVERSE)
+DEVICE = torch.device('cuda')
+print('Loading networks from "%s"...' % network_pkl_universe)
+f = dnnlib.util.open_url(network_pkl_universe)
+UNIVERSE_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
 f.close()

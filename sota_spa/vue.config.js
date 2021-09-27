@@ -1,3 +1,4 @@
+const webpack = require('webpack'); 
 const path = require('path');
 
 // const ESLintPlugin = require('eslint-webpack-plugin');
@@ -12,10 +13,13 @@ module.exports = {
 	],
 	lintOnSave: true,
 	configureWebpack: finalConfig => {
+		finalConfig.plugins.push(new webpack.ProvidePlugin({ _: "lodash" }));
 	},
 	chainWebpack: config => {
 		// --- define aliases ---
 		config.resolve.alias.set('@c', resolve('src/components'));
+		config.resolve.alias.set('Stores', resolve('src/store'));
+		config.resolve.alias.set('ImageGenerators', resolve('store/ImageGenerators'));
 
 		// --- make mixins and vars available to component scoped scss ---
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
@@ -29,6 +33,11 @@ module.exports = {
 				return options;
 			});
 		}
+
+		config.plugin('html').tap(args => {
+			args[0].title = "Fake Backgrounds";
+			return args;
+		});
 	},
 	// devServer: {
 	// 	proxy: {

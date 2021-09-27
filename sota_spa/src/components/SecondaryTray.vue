@@ -7,8 +7,8 @@
 				<template v-slot:activator>
 					<v-list-item-title>Generated Images</v-list-item-title>
 				</template>
-				<div v-for="i in 10" :key="i" class="mx-6">
-					<img class="stored-image" :src="require('@/assets/test-gen-bg/' + i + '.png')" />
+				<div v-for="(img, idx) in generatedImages" :key="idx" class="mx-6">
+					<img class="stored-image" :src="img" @click="setDisplayedImage(img)"/>
 				</div>
 			</v-list-group>
 
@@ -26,24 +26,25 @@
 	</v-navigation-drawer>
 </template>
 <script>
+	import { mapState, mapMutations } from 'vuex';
 	export default {
 		name: 'SecondaryTray',
 		data () {
 			return {
 				isTrayOpened: true,
 				isGeneratedImagesOpened: true,
-				isSavedImagesOpened: false,
-				admins: [
-					['Management', 'mdi-account-multiple-outline'],
-					['Settings', 'mdi-cog-outline']
-				],
-				cruds: [
-					['Create', 'mdi-plus-outline'],
-					['Read', 'mdi-file-outline'],
-					['Update', 'mdi-update'],
-					['Delete', 'mdi-delete']
-				]
+				isSavedImagesOpened: false
 			};
+		},
+		computed: {
+			...mapState('imageGenerators', {
+				generatedImages: 'generatedImages'
+			})
+		},
+		methods: {
+			...mapMutations('imageGenerators', {
+				setDisplayedImage: 'setDisplayedImage'
+			})
 		}
 	};
 </script>

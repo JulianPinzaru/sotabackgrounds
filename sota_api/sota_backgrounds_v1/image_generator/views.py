@@ -26,15 +26,20 @@ class call_model(APIView):
 
     def post(self, request):
         if request.method == 'POST':
-            # sentence is the query we want to get the prediction for
+            network = request.data.get('network')
             seeds = request.data.get('seeds')
             seeds = seeds if seeds else [random.randint(0, 65536)]
             truncation_psi = request.data.get('truncation_psi')
-            noise_mode = request.data.get('noise_mode')
+            noise_mode = request.data.get('noise_mode') if request.data.get('noise_mode') else 'none'
             class_idx = request.data.get('class_idx')
 
             DEVICE = settings.DEVICE
-            GENERATOR = settings.BACKGROUNDS_MODEL
+            if network == 'universe_generator':
+                GENERATOR = settings.UNIVERSE_MODEL
+            elif network == 'backgrounds_generator':
+                GENERATOR = settings.BACKGROUNDS_MODEL
+            else:
+                return JsonResponse({}, status=404)
 
             img_base64_str = generate_images(
                 device=DEVICE,
