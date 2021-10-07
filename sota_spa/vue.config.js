@@ -39,16 +39,17 @@ module.exports = {
 			return args;
 		});
 	},
-	// devServer: {
-	// 	proxy: {
-	// 		'/model/': {
-	// 			target: 'http://localhost:8000',
-	// 			ws: true,
-	// 			changeOrigin: true,
-	// 			logLevel: 'debug',
-	// 		}
-	// 	}
-	// }
+	devServer: {
+		disableHostCheck: true, //for ngrok
+		// proxy: {
+		// 	'/model/': {
+		// 		target: 'http://localhost:8000',
+		// 		ws: true,
+		// 		changeOrigin: true,
+		// 		logLevel: 'debug',
+		// 	}
+		// }
+	}
 };
 
 function addStyleResource (rule) {
