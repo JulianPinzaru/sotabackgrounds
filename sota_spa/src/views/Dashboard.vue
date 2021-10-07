@@ -62,7 +62,7 @@
 <style lang="scss" scoped>
 	.container {
 		display: flex;
-		justify-content: start;
+		justify-content: center;
 		position: relative;
 		height: 100%;
 	}

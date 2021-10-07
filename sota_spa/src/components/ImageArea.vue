@@ -27,7 +27,7 @@
 <style scoped lang="scss">
 	.image-area {
 		width: 100%;
-		height:  calc(100% - 5.2rem);
+		height: calc(100% - 5.2rem) !important;
 		display: flex;
 		justify-content: center;
 		align-items: center;
