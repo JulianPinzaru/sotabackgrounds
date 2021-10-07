@@ -1,6 +1,9 @@
 <template>
 	<v-container fluid class="image-area">
-		<img :src="image" />
+
+		<div class="image-wrapper">
+			<img :src="image" />
+		</div>
 	</v-container>
 </template>
 
@@ -24,15 +27,19 @@
 <style scoped lang="scss">
 	.image-area {
 		width: 100%;
-		height:  100%;
+		height:  calc(100% - 5.2rem);
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		img {
-			width: 1024px;
-			height: 1024px;
-			object-fit: contain;
-			object-position: center;
+		.image-wrapper {
+			max-width: 1024px;
+			max-height: 1024px;
+			img {
+				height: 100%;
+				width: 100%;
+				object-fit: contain;
+				object-position: center;
+			}
 		}
 	}
 </style>

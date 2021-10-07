@@ -2,7 +2,6 @@
 	<v-app-bar
 		id="main-app-bar"
 		app
-		color="blue darken-4"
 		dark
 		flat
 		clipped-left

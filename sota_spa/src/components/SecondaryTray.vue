@@ -13,15 +13,6 @@
 			</v-list-group>
 
 			<v-divider />
-
-			<v-list-group
-				:value="isSavedImagesOpened"
-			>
-				<template v-slot:activator>
-					<v-list-item-title>Saved Images</v-list-item-title>
-				</template>
-				<p class="mx-6"> some image goes here</p>
-			</v-list-group>
 		</v-list>
 	</v-navigation-drawer>
 </template>
@@ -32,8 +23,7 @@
 		data () {
 			return {
 				isTrayOpened: true,
-				isGeneratedImagesOpened: true,
-				isSavedImagesOpened: false
+				isGeneratedImagesOpened: true
 			};
 		},
 		computed: {

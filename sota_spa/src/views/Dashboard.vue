@@ -1,7 +1,9 @@
 <template>
 	<v-container fluid>
 		<image-area :image="getDisplayedImage" />
-		<v-btn primary @click="generate">Generate</v-btn>
+		<div class="d-flex justify-center" id="generate-wrapper">
+			<v-btn primary x-large block @click="generate">Generate</v-btn>
+		</div>
 	</v-container>
 </template>
 
@@ -56,3 +58,17 @@
 		}
 	};
 </script>
+
+<style lang="scss" scoped>
+	.container {
+		display: flex;
+		justify-content: start;
+		position: relative;
+		height: 100%;
+	}
+	#generate-wrapper {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+</style>

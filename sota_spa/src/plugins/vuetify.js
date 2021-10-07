@@ -5,7 +5,7 @@ import colors from 'vuetify/es5/util/colors';
 Vue.use(Vuetify);
 
 export default new Vuetify({
-	customVariables: ['~/assets/styles/vuetify-override-variables.scss'],
+	customVariables: ['~/styles/vuetify-override-variables.scss'],
 	treeShake: true,
 	// disables all the assets that are imported by default in vuetify
 	// such as Roboto fonts (which you might not need), icons etc...
@@ -21,7 +21,7 @@ export default new Vuetify({
 	},
 	theme: {
 		options: { customProperties: true },
-		dark: false,
+		dark: true,
 		themes: {
 			light: {
 				// primary: colors.purple.darken1,

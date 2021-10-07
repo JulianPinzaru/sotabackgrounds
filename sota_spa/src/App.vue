@@ -1,10 +1,10 @@
 <template>
-	<v-app>
+	<v-app color="blue-grey lighten-5">
 		<main-app-bar />
 		<main-tray />
 		<secondary-tray />
 
-		<v-main id="app-content">
+		<v-main id="app-content" >
 			<transition name="fade" appear mode="out-in">
 				<router-view/>
 			</transition>
@@ -29,7 +29,9 @@
 	};
 </script>
 <style lang="scss">
+	// @import '~vuetify/src/styles/styles.sass';
+
 	#app-content {
-		// padding-top: 32px !important;
+		// background-color: map-deep-get($colors, 'blue-grey', 'darken-3');
 	}
 </style>
