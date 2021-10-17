@@ -26,14 +26,12 @@
 
 <style scoped lang="scss">
 	.image-area {
-		width: 100%;
-		height: calc(100% - 5.2rem) !important;
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: top;
 		.image-wrapper {
-			max-width: 1024px;
-			max-height: 1024px;
+			width: 100%;
+			height: calc(100vh - 15.2rem) !important;
 			img {
 				height: 100%;
 				width: 100%;

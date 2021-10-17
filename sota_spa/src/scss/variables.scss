@@ -56,17 +56,27 @@ $headings: (
 $material-dark-elevation-colors: () !default;
 $material-dark-elevation-colors: map-deep-merge(
   (
+    '0': #151c1e, 
+    '1': #181f22,
+    '2': #1b2325,
+    '3': #253034,
+    '4': #20292d,
+    '6': #253034,
+    '8': #253034,
+    '12': #303e43,
+    '16': #3a4b52,
+    '24': #455961
 
-    '0': #010101, 
-    '1': #010202,
-    '2': #020303,
-    '3': #040505,
-    '4': #050607,
-    '6': #07090a,
-    '8': #0a0d0e,
-    '12': #0d1012,
-    '16': #111618,
-    '24': #292d2f,
+    // '0': #010101, 
+    // '1': #010202,
+    // '2': #020303,
+    // '3': #040505,
+    // '4': #050607,
+    // '6': #07090a,
+    // '8': #0a0d0e,
+    // '12': #0d1012,
+    // '16': #111618,
+    // '24': #292d2f,
 
      // '0': #020202, 
     // '1': #030405,
@@ -91,7 +101,7 @@ $material-dark: map-deep-merge(
       'regular': map-get($shades, 'black'),
       'lights-out': rgba(map-get($shades, 'black'), 0.2)
     ),
-    'app-bar': map-get($material-dark-elevation-colors, '24'),
+    'app-bar': map-get($material-dark-elevation-colors, '1'),
     'background': map-get($material-dark-elevation-colors, '2'),
     'bottom-navigation': map-get($material-dark-elevation-colors, '8'),
     'surface': map-get($material-dark-elevation-colors, '2'),
@@ -105,7 +115,7 @@ $material-dark: map-deep-merge(
       'text-color': map-get($shades, 'white'),
       'past-color': rgba(map-get($shades, 'white'), .50)
       ),
-    'cards': map-get($material-dark-elevation-colors, '1'),
+    'cards': map-get($material-dark-elevation-colors, '6'),
     'chips': #555,
     'code': (
       'background': rgba(map-get($shades, 'white'), 0.1),
@@ -145,7 +155,7 @@ $material-dark: map-deep-merge(
     'expansion-panels': (
       'focus': #494949
     ),
-    'navigation-drawer': map-get($material-dark-elevation-colors, '6'),
+    'navigation-drawer': map-get($material-dark-elevation-colors, '4'),
     'selection-controls': (
       'disabled': rgba(map-get($shades, 'white'), 0.3),
       'thumb': (

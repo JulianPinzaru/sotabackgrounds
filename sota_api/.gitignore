@@ -27,14 +27,14 @@ db.sqlite3
 .mypy_cache
 
 # Public files (includes media and static files)
-/sota_backgrounds_v1/public/
+/sota_backgrounds/public/
 
 # Ignore databases themself, don't push them on repo
 /databases/pg_data
 /databases/rd_data
 
 # Ignore huge model networks files
-/sota_backgrounds_v1/inference/networks/universe1024/
-/sota_backgrounds_v1/inference/networks/
-/sota_backgrounds_v1/inference/out/
-/sota_backgrounds_v1/out/
+/sota_backgrounds/schultz/networks/universe1024/
+/sota_backgrounds/schultz/networks/
+/sota_backgrounds/schultz/out/
+/sota_backgrounds/out/

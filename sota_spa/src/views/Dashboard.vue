@@ -26,7 +26,6 @@
 					seeds: null,
 					truncation_psi: 0.4,
 					class_idx: null,
-					// class_idx: 4,
 					noise_mode: 'random'
 				}
 			};
@@ -40,21 +39,11 @@
 				getDisplayedImage: 'getDisplayedImage'
 			})
 		},
-		mounted () {
-			// this.axios.get('model/').then((response) => {
-			// 	console.log(response.data);
-			// });
-		},
 
 		methods: {
 			...mapActions('imageGenerators', {
 				generate: 'generate'
 			})
-			// generate () {
-			// 	this.axios.post('model/', this.requestParameters).then(response => {
-			// 		this.image = response.data.image;
-			// 	});
-			// }
 		}
 	};
 </script>

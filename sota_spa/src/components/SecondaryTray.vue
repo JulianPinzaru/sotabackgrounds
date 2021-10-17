@@ -7,8 +7,10 @@
 				<template v-slot:activator>
 					<v-list-item-title>Generated Images</v-list-item-title>
 				</template>
-				<div v-for="(img, idx) in generatedImages" :key="idx" class="mx-6">
-					<img class="stored-image" :src="img" @click="setDisplayedImage(img)"/>
+				<div class="d-flex flex-row flex-wrap justify-center align-center">
+					<div v-for="(img, idx) in generatedImages" :key="idx" class="mx-2">
+						<img class="stored-image" :src="img" @click="setDisplayedImage(img)"/>
+					</div>
 				</div>
 			</v-list-group>
 
@@ -48,7 +50,7 @@
 			object-position: center;
 			object-fit: cover;
 			max-width: 100%;
-			max-width: 120px;
+			max-width: 80px;
 		}
 	}
 </style>

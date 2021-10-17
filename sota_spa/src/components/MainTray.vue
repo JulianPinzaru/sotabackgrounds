@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer id="main-tray" app clipped :value="isTrayOpened" width="340px">
+	<v-navigation-drawer id="main-tray" app clipped :value="isTrayOpened">
 		<v-list>
 			<v-list-item>
 				<v-select
