@@ -1,10 +1,9 @@
 <template>
-	<v-container fluid class="image-area">
-
+	<div class="image-area">
 		<div class="image-wrapper">
 			<img :src="image" />
 		</div>
-	</v-container>
+	</div>
 </template>
 
 <script>
@@ -29,12 +28,22 @@
 		display: flex;
 		justify-content: center;
 		align-items: top;
+		width: 100%;
+		height: 100%;
+		// max-height: calc(100vh - 15.2rem) !important;
+
 		.image-wrapper {
+			display: flex;
+			justify-content: center;
 			width: 100%;
-			height: calc(100vh - 15.2rem) !important;
+			height: 100%;
+
 			img {
-				height: 100%;
+				min-height: 50vh;
+				// height: 100%;
 				width: 100%;
+				max-width: 1280px;
+				max-height: 768px;
 				object-fit: contain;
 				object-position: center;
 			}

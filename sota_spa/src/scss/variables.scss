@@ -66,30 +66,6 @@ $material-dark-elevation-colors: map-deep-merge(
     '12': #303e43,
     '16': #3a4b52,
     '24': #455961
-
-    // '0': #010101, 
-    // '1': #010202,
-    // '2': #020303,
-    // '3': #040505,
-    // '4': #050607,
-    // '6': #07090a,
-    // '8': #0a0d0e,
-    // '12': #0d1012,
-    // '16': #111618,
-    // '24': #292d2f,
-
-     // '0': #020202, 
-    // '1': #030405,
-    // '2': #050707,
-    // '3': #06090A,
-    // '4': #080B0C,
-    // '6': #111618,
-    // '8': #192124,
-    // '12': #212B31,
-    // '8': #3A4C55,
-    // '12': #425761,
-    // '16': #4A626D,
-    // '24': #536C79
   ),
   $material-dark-elevation-colors
 );
@@ -150,7 +126,7 @@ $material-dark: map-deep-merge(
       'disabled': rgba(map-get($shades, 'white'), 0.3),
       'focused': rgba(map-get($shades, 'white'), 0.12),
       'focused-alt': rgba(map-get($shades, 'white'), 0.1),
-      'pressed': rgba(#ccc, 0.25)
+      'pressed': rgba(map-get($purple, 'lighten-1'), 0.25)
     ),
     'expansion-panels': (
       'focus': #494949
