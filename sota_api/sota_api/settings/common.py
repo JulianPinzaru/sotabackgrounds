@@ -227,8 +227,11 @@ import training.augment
 # MODEL_PATH = pathlib.Path(
 #     "/home/weex/repos/www/sota-backgrounds/sota_api/inference/networks/univervse1024/network-snapshot-001280.pkl")
 
+# MODEL_PATH_BACKGROUNDS = pathlib.Path(
+#     "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1024/network-snapshot-003520.pkl")
+
 MODEL_PATH_BACKGROUNDS = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1024/network-snapshot-003520.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-2820.pkl")
 
 network_pkl_backgrounds = str(MODEL_PATH_BACKGROUNDS)
 print('Loading networks from "%s"...' % network_pkl_backgrounds)
