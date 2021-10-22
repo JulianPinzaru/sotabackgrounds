@@ -5,10 +5,12 @@ numpy==1.21.2
 Pillow==8.3.2
 pytz==2021.1
 sqlparse==0.4.2
-torch==1.8.2+cu111
-torchaudio==0.8.2
-torchvision==0.9.2+cu111
+# torch==1.8.2+cu111
+# torchaudio==0.8.2
+# torchvision==0.9.2+cu111
 typing-extensions==3.10.0.2
 click
 opensimplex
 requests
+django-cors-headers
+scipy
