@@ -6,6 +6,14 @@
 const LIMIT_GENERATED_IMAGES = 30;
 const MULTICLASS_NETWORKS = ['backgrounds_generator'];
 
+const DEFAULT_REQUEST_PARAMETERS = Object.freeze({
+	network: 'universe_generator',
+	seeds: null,
+	truncation_psi: 0.6,
+	class_idx: null,
+	noise_mode: 'random'
+});
+
 const state = {
 	displayedImage: null,
 	generatedImages: [],
@@ -13,7 +21,7 @@ const state = {
 	requestParameters: {
 		network: 'universe_generator',
 		seeds: null,
-		truncation_psi: 0.4,
+		truncation_psi: 0.6,
 		class_idx: null,
 		noise_mode: 'random'
 	}
@@ -58,7 +66,11 @@ const mutations = {
 		state.generatedImages.splice(state.generatedImages.length - 1, 1);
 	},
 	setRequestParameters (state, params) {
+		if (params.network === 'backgrounds_generator' && state.requestParameters.class_idx === null) { params.class_idx = 0; }
 		state.requestParameters = _.extend({}, state.requestParameters, params);
+	},
+	resetRequestParameters (state) {
+		state.requestParameters = DEFAULT_REQUEST_PARAMETERS;
 	}
 };
 

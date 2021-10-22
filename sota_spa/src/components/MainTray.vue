@@ -4,14 +4,16 @@
 			<v-list-item>
 				<v-select
 					:items="networkSelect"
+					:value="requestParameters.network"
 					@input="$event => assignParams('network', $event)"
 					label="Image Type"
 					flat
 				></v-select>
 			</v-list-item>
-			<v-list-item>
+			<v-list-item v-if="isClassIdxAllowed">
 				<v-select
 					:items="networkClassSelect"
+					:value="requestParameters.class_idx"
 					@input="$event => assignParams('class_idx', $event)"
 					label="Image Subtype"
 					flat
@@ -21,6 +23,7 @@
 			<v-list-item>
 				<v-select
 					:items="noiseModeSelect"
+					:value="requestParameters.noise_mode"
 					@input="$event => assignParams('noise_mode', $event)"
 					label="Noise Mode"
 					flat
