@@ -52,7 +52,7 @@
 	.container {
 		display: flex;
 		flex-direction: column;
-		justify-content: start;
+		justify-content: flex-start;
 		position: relative;
 
 		height: 100%;

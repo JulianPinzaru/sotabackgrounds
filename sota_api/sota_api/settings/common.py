@@ -231,7 +231,7 @@ import training.augment
 #     "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1024/network-snapshot-003520.pkl")
 
 MODEL_PATH_BACKGROUNDS = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-2820.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-3740.pkl")
 
 network_pkl_backgrounds = str(MODEL_PATH_BACKGROUNDS)
 print('Loading networks from "%s"...' % network_pkl_backgrounds)
@@ -242,7 +242,7 @@ BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: igno
 f.close()
 
 MODEL_PATH_UNIVERSE = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/univervse1280x768/universe-1280x768-3420.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-2800.pkl")
 network_pkl_universe = str(MODEL_PATH_UNIVERSE)
 # DEVICE = torch.device('cpu')
 DEVICE = torch.device('cuda')
