@@ -1,49 +1,73 @@
 <template>
 	<v-container fluid>
-		<image-area :image="getDisplayedImage" />
-		<h1>Pick the preset:</h1>
+		<template v-if="!isEditing">
+			<image-area :image="getDisplayedImage" />
+			<div class="bottom-area">
+				<div class="generate">
+					<v-btn color="primary" x-medium @click="generate">Generate</v-btn>
+					<v-btn color="secondary" x-medium @click="download">Download</v-btn>
+					<v-btn color="secondary" x-medium @click="startEditing">Edit</v-btn>
+				</div>
+			</div>
+		</template>
+		<image-editor :is-open="isEditing" :image="editingImage" :image-name="editingImageName" @close="stopEditing"/>
 
-		<div class="bottom-area">
-			<div class="presets">
-				<img class="mx-2" v-for="preset in 4" :key="preset" :src="'http://lorempixel.com/240/160/'" />
-			</div>
-			<div class="generate">
-				<v-btn color="primary" x-large block @click="generate">Generate</v-btn>
-			</div>
-		</div>
 	</v-container>
 </template>
 
 <script>
-	import { mapActions, mapGetters } from 'vuex';
+
+	import { mapActions, mapGetters, mapState, mapMutations } from 'vuex';
 	import ImageArea from '../components/ImageArea.vue';
+	import ImageEditor from '../components/ImageEditor.vue';
 
 	export default {
 		name: 'Dashboard',
 
 		components: {
+			ImageEditor,
 			ImageArea
 		},
 
 		data () {
 			return {
-				presets: [
-					{
-						image: ''
-					}
-				]
+				editingImage: null
 			};
 		},
 		computed: {
+			...mapState('imageGenerators', {
+				requestParameters: 'requestParameters'
+			}),
 			...mapGetters('imageGenerators', {
 				getDisplayedImage: 'getDisplayedImage'
-			})
+			}),
+			isEditing () {
+				return this.editingImage !== null;
+			},
+			editingImageName () {
+				return `edited-image-${this.requestParameters.network}-${this.requestParameters.truncation_psi}.png`;
+			}
 		},
 
 		methods: {
-			...mapActions('imageGenerators', {
-				generate: 'generate'
-			})
+			...mapMutations('imageGenerators', ['setEditingImage']),
+			...mapActions('imageGenerators', [
+				'generate'
+			]),
+			download () {
+				var a = document.createElement('a');
+				a.href = this.getDisplayedImage;
+				a.download = `image-${this.requestParameters.network}-${this.requestParameters.truncation_psi}.png`;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+			},
+			startEditing () {
+				this.editingImage = this.getDisplayedImage;
+			},
+			stopEditing () {
+				this.editingImage = null;
+			}
 		}
 	};
 </script>
@@ -53,25 +77,17 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-		position: relative;
 
 		height: 100%;
 		overflow: hidden;
 	}
 	.bottom-area {
-		// position: absolute;
-		// bottom: 0;
-		min-height: 200px;
 		width: 100%;
-		.presets {
-			display: flex;
-			flex-wrap: nowrap;
-			flex-direction: row;
-			justify-content: center;
-			margin-bottom: 1rem;
-		}
+		margin-top: 2rem;
+
 		.generate {
 			display: flex;
+			justify-content: center;
 			width: 100%;
 		}
 	}

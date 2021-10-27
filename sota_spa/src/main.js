@@ -6,7 +6,6 @@ import vuetify from './plugins/vuetify';
 import _ from 'lodash';
 import axios_instance from './api.service';
 
-
 import '@/styles/main.scss';
 
 Vue.config.productionTip = false;

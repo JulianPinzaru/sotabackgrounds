@@ -24,7 +24,9 @@ const state = {
 		truncation_psi: 0.6,
 		class_idx: null,
 		noise_mode: 'random'
-	}
+	},
+	isEditing: false,
+	editingImage: null
 };
 
 const getters = {
@@ -35,23 +37,37 @@ const getters = {
 		return state.generatedImages.length > limit;
 	},
 	getDisplayedImage: (state) => {
-		return state.displayedImage;
+		return state.editingImage ? state.editingImage : state.displayedImage;
 	}
 };
 
 const actions = {
 
-	generate ({ commit, state, getters }) {
+	generate ({ commit, state, getters, dispatch }) {
+		if (state.isEditing || state.editingImage) { commit('stopEditing'); }
 		return new Promise((resolve, reject) => {
 			this._vm.axios.post('model/', state.requestParameters).then(response => {
 				commit('addGeneratedImage', response.data.image);
 				if (getters.generatedImagesExceedLimit(LIMIT_GENERATED_IMAGES)) {
 					commit('removeLastGeneratedImage');
 				}
-				commit('setDisplayedImage', response.data.image);
+				dispatch('setDisplayedImage', response.data.image);
 				resolve(response.data.image);
 			});
 		});
+	},
+
+	setDisplayedImage ({ commit, state }, image) {
+		if (state.isEditing) { commit('stopEditing'); }
+		commit('setDisplayedImage', image);
+	},
+
+	startEditing ({ commit }, image) {
+		commit('startEditing', image);
+	},
+
+	stopEditing ({ commit }) {
+		commit('stopEditing');
 	}
 };
 
@@ -71,6 +87,17 @@ const mutations = {
 	},
 	resetRequestParameters (state) {
 		state.requestParameters = DEFAULT_REQUEST_PARAMETERS;
+	},
+	startEditing (state, image) {
+		if (state.isEditing) { return; }
+		state.isEditing = true;
+		state.editingImage = image;
+	},
+	stopEditing (state) {
+		state.isEditing = false;
+	},
+	setEditingImage (state, image) {
+		state.editingImage = image;
 	}
 };
 
