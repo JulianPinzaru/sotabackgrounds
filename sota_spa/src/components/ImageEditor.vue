@@ -16,13 +16,17 @@
 
 		<v-btn
 			class="download-image"
-			icon
-			dark
+			:icon="$vuetify.breakpoint.mobile ? true : false"
+			:dark="$vuetify.breakpoint.mobile ? true : false"
+			:color="$vuetify.breakpoint.mobile ? '' : 'primary'"
+			:rounded="$vuetify.breakpoint.mobile ? '' : true"
 			@click="downloadImage"
 		>
-			<v-icon>mdi-download</v-icon>
+			<v-icon v-if="$vuetify.breakpoint.mobile">mdi-download</v-icon>
+			<template v-else>
+				Download
+			</template>
 		</v-btn>
-
 		<tui-image-editor v-if="editingImage" ref="tuiImageEditor" :include-ui="includeUI" :options="options"></tui-image-editor>
 	</v-dialog>
 </template>
@@ -128,60 +132,66 @@
 <style lang="scss">
 	@import '~vuetify/src/styles/styles.sass';
 
-	.image-editor {
-		width: 100%;
-		height: 100%;
-	}
-
-	.close-image-editor {
-		position: absolute;
-		left: .2rem;
-		top: .2rem;
-		z-index: 2;
-		@include media-breakpoint('md-and-down') {
-			top: 3.2rem;
-			left: 0;
+	.v-dialog {
+		.image-editor {
+			width: 100%;
+			height: 100%;
 		}
-	}
-	.download-image {
-		position: absolute;
-		top: 3.2rem;
-		right: 0;
-		z-index: 2;
-		@include media-breakpoint('md-and-up') {
+
+		.close-image-editor {
+			position: absolute;
+			left: .2rem;
+			top: .2rem;
+			z-index: 2;
+			@include media-breakpoint('md-and-down') {
+				top: 3.2rem;
+				left: 0;
+			}
+		}
+		.download-image {
+			position: absolute;
+			top: 3.2rem;
+			right: 0;
+			z-index: 2;
+			@include media-breakpoint('md-and-up') {
+				top: .8rem;
+				right: .8rem;
+				width: 120px;
+				font-family: Roboto;
+				text-transform: capitalize;
+			}
+		}
+
+		// override tui styles
+		.tui-image-editor-header-logo {
 			display: none;
 		}
-	}
-
-	// override tui styles
-	.tui-image-editor-header-logo {
-		display: none;
-	}
 		.tui-image-editor-header-buttons div:first-child {
 			display: none;
 		}
-	.tui-image-editor-download-btn {
-		background-color: var(--v-primary-base) !important;
-		border-color: var(--v-primary-base) !important;
-	}
-	@include media-breakpoint('md-and-down') {
+		.tui-image-editor-download-btn {
+			background-color: var(--v-primary-base) !important;
+			border-color: var(--v-primary-base) !important;
+			display: none !important;
+		}
 		.tui-image-editor-download-btn {
 			position: relative;
 			top: 2.75rem;
 			right: 1rem;
 		}
-	}
-	.tui-image-editor-container {
-		background-color: map-get($material-dark-elevation-colors, '2');
-		.tui-image-editor-main-container {
-			background-color: map-get($material-dark-elevation-colors, '2') !important;
+		.tui-image-editor-container {
+			background-color: map-get($material-dark-elevation-colors, '2');
+			.tui-image-editor-main-container {
+				background-color: map-get($material-dark-elevation-colors, '2') !important;
+			}
+			.tui-image-editor-controls {
+				background-color: map-get($material-dark-elevation-colors, '1') !important;
+			}
 		}
-		.tui-image-editor-controls {
-			background-color: map-get($material-dark-elevation-colors, '1') !important;
+		.tui-image-editor-submenu-style {
+			background-color: map-get($material-dark-elevation-colors, '3') !important;
 		}
 	}
-	.tui-image-editor-submenu-style {
-		background-color: map-get($material-dark-elevation-colors, '3') !important;
-	}
+
 
 </style>

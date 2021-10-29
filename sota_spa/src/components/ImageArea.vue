@@ -2,6 +2,7 @@
 	<div class="image-area">
 		<div class="image-wrapper">
 			<img :src="image" />
+			<v-icon class="image-icon-placeholder" x-large v-if="!image">mdi-image-outline</v-icon>
 		</div>
 	</div>
 </template>
@@ -38,6 +39,7 @@
 			justify-content: center;
 			width: 100%;
 			height: 100%;
+			position: relative;
 
 			img {
 				min-height: 50vh;
@@ -47,6 +49,12 @@
 				max-height: 768px;
 				object-fit: contain;
 				object-position: center;
+			}
+
+			.image-icon-placeholder {
+				position: absolute;
+				z-index: 2;
+				height: 100%;
 			}
 		}
 	}
