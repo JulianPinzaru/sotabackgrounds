@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer id="secondary-tray" app clipped :value="isTrayOpened" right width="280px">
+	<v-navigation-drawer id="right-nav" app clipped :value="navRight" right width="280px">
 		<v-list>
 			<v-list-group
 				:value="isGeneratedImagesOpened"
@@ -7,11 +7,13 @@
 				<template v-slot:activator>
 					<v-list-item-title>Generated Images</v-list-item-title>
 				</template>
-				<div class="d-flex flex-row flex-wrap justify-center align-center">
+				<v-item-group class="d-flex flex-row flex-wrap justify-center align-center">
 					<div v-for="(img, idx) in generatedImages" :key="idx" class="mx-2">
-						<img class="stored-image" :src="img" @click="setDisplayedImage(img)"/>
+						<v-item v-slot="{ active, toggle }">
+							<img :class="{'stored-image': true, 'is-active': active}" :src="img" @click="select(img, toggle)"/>
+						</v-item>
 					</div>
-				</div>
+				</v-item-group>
 			</v-list-group>
 
 			<v-divider />
@@ -31,17 +33,22 @@
 		computed: {
 			...mapState('imageGenerators', {
 				generatedImages: 'generatedImages'
-			})
+			}),
+			...mapState('system', ['navRight'])
 		},
 		methods: {
 			...mapMutations('imageGenerators', {
 				setDisplayedImage: 'setDisplayedImage'
-			})
+			}),
+			select (image, toggleFunc) {
+				this.setDisplayedImage(image);
+				toggleFunc();
+			}
 		}
 	};
 </script>
 <style lang="scss">
-	#secondary-tray {
+	#right-nav {
 		& > div {
 			@include soft-scroll($width: 0.5, $color: map-get($blue-grey, 'lighten-4'));
 		}
@@ -51,6 +58,13 @@
 			object-fit: cover;
 			max-width: 100%;
 			max-width: 80px;
+			&:hover {
+				cursor: pointer;
+			}
+
+			&.is-active {
+				filter: brightness(150%);
+			}
 		}
 	}
 </style>

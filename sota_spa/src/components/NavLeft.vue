@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer id="main-tray" app clipped :value="isTrayOpened">
+	<v-navigation-drawer id="left-nav" app clipped :value="navLeft" width="280px" bottom>
 		<v-list>
 			<v-list-item>
 				<v-select
@@ -149,7 +149,8 @@
 		},
 		computed: {
 			...mapGetters('imageGenerators', ['isClassIdxAllowed']),
-			...mapState('imageGenerators', ['requestParameters'])
+			...mapState('imageGenerators', ['requestParameters']),
+			...mapState('system', ['navLeft'])
 		},
 		methods: {
 			...mapMutations('imageGenerators',
@@ -162,7 +163,7 @@
 	};
 </script>
 <style lang="scss">
-	#main-tray {
+	#left-nav {
 		& > div {
 			@include soft-scroll($width: 0.5, $color: map-get($blue-grey, 'lighten-4'));
 		}

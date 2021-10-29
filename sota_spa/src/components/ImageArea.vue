@@ -27,7 +27,8 @@
 	.image-area {
 		display: flex;
 		justify-content: center;
-		align-items: top;
+		align-items: flex-start;
+		margin-top: 2rem;
 		width: 100%;
 		height: 100%;
 		// max-height: calc(100vh - 15.2rem) !important;

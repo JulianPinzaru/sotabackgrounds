@@ -21,7 +21,7 @@ $material-dark: (
   'text': (
     'theme': map-deep-get($colors, 'blue-grey', 'darken-3'),
     'primary': map-get($shades, 'white'),
-    'secondary': rgba(map-get($shades, 'white'), 0.7),
+    'secondary': map-deep-get($colors, 'blue-grey', 'lighten-1'),
     'disabled': rgba(map-get($shades, 'white'), 0.5),
     'link': map-get($blue, 'accent-1'),
     'link-hover': map-get($grey, 'lighten-3')

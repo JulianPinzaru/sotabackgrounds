@@ -1,8 +1,8 @@
 <template>
 	<v-app color="blue-grey lighten-5">
 		<main-app-bar />
-		<main-tray />
-		<secondary-tray />
+		<nav-left />
+		<nav-right />
 
 		<v-main id="app-content" >
 			<transition name="fade" appear mode="out-in">
@@ -14,14 +14,14 @@
 
 <script>
 	import MainAppBar from '@c/MainAppBar.vue';
-	import MainTray from '@c/MainTray.vue';
-	import SecondaryTray from '@c/SecondaryTray.vue';
+	import NavLeft from '@c/NavLeft.vue';
+	import NavRight from '@c/NavRight.vue';
 	export default {
 		name: 'App',
 		components: {
 			MainAppBar,
-			MainTray,
-			SecondaryTray
+			NavLeft,
+			NavRight
 		},
 		data: () => ({
 			//

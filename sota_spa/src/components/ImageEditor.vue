@@ -14,7 +14,16 @@
 			<v-icon>mdi-close</v-icon>
 		</v-btn>
 
-		<tui-image-editor v-if="editingImage" ref="tui-image-editor" :include-ui="includeUI" :options="options"></tui-image-editor>
+		<v-btn
+			class="download-image"
+			icon
+			dark
+			@click="downloadImage"
+		>
+			<v-icon>mdi-download</v-icon>
+		</v-btn>
+
+		<tui-image-editor v-if="editingImage" ref="tuiImageEditor" :include-ui="includeUI" :options="options"></tui-image-editor>
 	</v-dialog>
 </template>
 
@@ -65,6 +74,13 @@
 			}
 		}),
 
+		mounted () {
+			if (this.$vuetify.breakpoint.mobile) {
+				this.options.cssMaxWidth = 360;
+				this.options.cssMaxHeight = 470;
+			}
+		},
+
 		computed: {
 			editingImage: {
 				get () {
@@ -95,12 +111,23 @@
 			},
 			closeEditor () {
 				this.$emit('close', this.editingImage);
+			},
+			downloadImage () {
+				const imgData = this.$refs.tuiImageEditor.invoke('toDataURL');
+				var a = document.createElement('a');
+				a.href = imgData;
+				a.download = 'edited-image.png';
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
 			}
 		}
 	};
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+	@import '~vuetify/src/styles/styles.sass';
+
 	.image-editor {
 		width: 100%;
 		height: 100%;
@@ -111,5 +138,50 @@
 		left: .2rem;
 		top: .2rem;
 		z-index: 2;
+		@include media-breakpoint('md-and-down') {
+			top: 3.2rem;
+			left: 0;
+		}
 	}
+	.download-image {
+		position: absolute;
+		top: 3.2rem;
+		right: 0;
+		z-index: 2;
+		@include media-breakpoint('md-and-up') {
+			display: none;
+		}
+	}
+
+	// override tui styles
+	.tui-image-editor-header-logo {
+		display: none;
+	}
+		.tui-image-editor-header-buttons div:first-child {
+			display: none;
+		}
+	.tui-image-editor-download-btn {
+		background-color: var(--v-primary-base) !important;
+		border-color: var(--v-primary-base) !important;
+	}
+	@include media-breakpoint('md-and-down') {
+		.tui-image-editor-download-btn {
+			position: relative;
+			top: 2.75rem;
+			right: 1rem;
+		}
+	}
+	.tui-image-editor-container {
+		background-color: map-get($material-dark-elevation-colors, '2');
+		.tui-image-editor-main-container {
+			background-color: map-get($material-dark-elevation-colors, '2') !important;
+		}
+		.tui-image-editor-controls {
+			background-color: map-get($material-dark-elevation-colors, '1') !important;
+		}
+	}
+	.tui-image-editor-submenu-style {
+		background-color: map-get($material-dark-elevation-colors, '3') !important;
+	}
+
 </style>

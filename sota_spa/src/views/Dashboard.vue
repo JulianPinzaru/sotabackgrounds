@@ -3,10 +3,22 @@
 		<template v-if="!isEditing">
 			<image-area :image="getDisplayedImage" />
 			<div class="bottom-area">
-				<div class="generate">
-					<v-btn color="primary" x-medium @click="generate">Generate</v-btn>
-					<v-btn color="secondary" x-medium @click="download">Download</v-btn>
-					<v-btn color="secondary" x-medium @click="startEditing">Edit</v-btn>
+				<div class="generate btn-group">
+					<v-btn-toggle
+						rounded
+					>
+						<v-btn :disabled="!getDisplayedImage" x-medium @click="download">
+							<v-icon dark>mdi-download</v-icon>
+						</v-btn>
+						<v-btn class="btn-generate" color="primary" x-medium @click="generate">
+							<v-icon left dark>mdi-fingerprint</v-icon>
+							Generate
+							<v-icon right dark>mdi-fingerprint</v-icon>
+						</v-btn>
+						<v-btn x-medium @click="startEditing">
+							<v-icon dark>mdi-palette</v-icon>
+						</v-btn>
+					</v-btn-toggle>
 				</div>
 			</div>
 		</template>
@@ -89,6 +101,14 @@
 			display: flex;
 			justify-content: center;
 			width: 100%;
+		}
+		.btn-generate {
+			font-size: 1.2em;
+			font-weight: bold;
+			font-family: Roboto;
+			i {
+				font-size: 1.25em;
+			}
 		}
 	}
 </style>
