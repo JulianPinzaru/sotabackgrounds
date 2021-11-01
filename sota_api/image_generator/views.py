@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from schultz.backgrounds_generate import generate_images
-import random
+from image_generator.serializers import GeneratorRequestSerializer
 
 
 class call_model(APIView):
@@ -18,29 +18,32 @@ class call_model(APIView):
         return JsonResponse(response, status=200)
 
     def post(self, request):
-        network = request.data.get('network')
-        seeds = request.data.get('seeds')
-        seeds = seeds if seeds else [random.randint(0, 65536)]
-        truncation_psi = request.data.get('truncation_psi')
-        noise_mode = request.data.get('noise_mode') if request.data.get('noise_mode') else 'none'
-        class_idx = request.data.get('class_idx')
+        query_serializer = GeneratorRequestSerializer(data=request.data)
+        is_valid = query_serializer.is_valid(raise_exception=False)
 
-        DEVICE = settings.DEVICE
-        if network == 'universe_generator':
-            GENERATOR = settings.UNIVERSE_MODEL
-        elif network == 'backgrounds_generator':
-            GENERATOR = settings.BACKGROUNDS_MODEL
+        if is_valid:
+            network = query_serializer.data['network']
+            DEVICE = settings.DEVICE
+            if network == 'universe_generator':
+                GENERATOR = settings.UNIVERSE_MODEL
+            elif network == 'backgrounds_generator':
+                GENERATOR = settings.BACKGROUNDS_MODEL
+            else:
+                return JsonResponse({}, status=404)
+
+            img_base64_str = generate_images(
+                device=DEVICE,
+                generator=GENERATOR,
+                process='image',
+                seeds=query_serializer.data['seeds'],
+                truncation_psi=query_serializer.data['truncation_psi'],
+                noise_mode=query_serializer.data['noise_mode'],  # random , None
+                outdir='out',
+                class_idx=query_serializer.data['class_idx'])
+            response = {'image': img_base64_str}
+            return Response(response, status=200)
         else:
-            return JsonResponse({}, status=404)
+            return Response(query_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        img_base64_str = generate_images(
-            device=DEVICE,
-            generator=GENERATOR,
-            process='image',
-            seeds=seeds,
-            truncation_psi=truncation_psi,
-            noise_mode=noise_mode,  # random , None
-            outdir='out',
-            class_idx=class_idx)
-        response = {'image': img_base64_str}
-        return JsonResponse(response, status=200)
+
+
