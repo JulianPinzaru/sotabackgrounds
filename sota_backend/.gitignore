@@ -1,0 +1,29 @@
+.DS_Store
+
+# Editor directories and files
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.cache
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+
+# Public files (includes media and static files)
+/public/
+
+# Ignore databases themself, don't push them on repo
+/databases/pg_data
+/databases/rd_data

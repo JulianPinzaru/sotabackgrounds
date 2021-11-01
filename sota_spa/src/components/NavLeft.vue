@@ -31,7 +31,6 @@
 			</v-list-item>
 
 			<v-list-item class="mt-7">
-
 				<v-slider
 					label="Truncation"
 					hint="Truncation psi ψ = 1 means no truncation. ψ = 0 means no diversity (the entire latent space generates a single average image.Usable values are usually between 0.5 and 1."
@@ -42,13 +41,6 @@
 					:value="requestParameters.truncation_psi"
 					@input="$event => assignParams('truncation_psi', $event)"
 				></v-slider>
-				<!-- 				<v-text-field
-					:value="requestParameters.truncation_psi"
-					@input="$event => assignParams('truncation_psi', $event)"
-					:min="-3.0"
-					:max="3.0"
-					type="number"
-				/> -->
 			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
