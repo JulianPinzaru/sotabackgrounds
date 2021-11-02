@@ -42,6 +42,32 @@
 					@input="$event => assignParams('truncation_psi', $event)"
 				></v-slider>
 			</v-list-item>
+			<v-list-item class="mt-3">
+				<v-checkbox
+					v-model="randomSeed"
+					label="Use a random seed"
+				></v-checkbox>
+			</v-list-item>
+			<v-list-item v-if="!randomSeed" class="mt-3">
+				<v-text-field
+					type="number"
+					label="Specified seed number"
+					:value="seed"
+					@input="$event => seed = Number($event)"
+					append-outer-icon="mdi-plus"
+					@click:append-outer="incrementSeed"
+					prepend-icon="mdi-minus"
+					@click:prepend="decrementSeed"
+					:max="65536"
+					:min="0"
+					:rules="[
+						v => ( v >= 0 ) || 'The seed number cannot be negative.',
+						v => ( v <= 65536 ) || 'The seed number cannot be above 65536.'
+					]
+					"
+				>
+				</v-text-field>
+			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
 </template>
@@ -142,7 +168,26 @@
 		computed: {
 			...mapGetters('imageGenerators', ['isClassIdxAllowed']),
 			...mapState('imageGenerators', ['requestParameters']),
-			...mapState('system', ['navLeft'])
+			...mapState('system', ['navLeft']),
+			seed: {
+				get () {
+					return !_.isEmpty(this.requestParameters.seeds) ? this.requestParameters.seeds[0] : null;
+				},
+				set (newVal) {
+					if (newVal === null) { this.setRequestParameters({ seeds: null }); }
+					else { this.setRequestParameters({ seeds: [newVal] }); }
+				}
+			},
+			randomSeed: {
+				get () {
+					return this.seed === null;
+				},
+				set (newVal) {
+					console.log(newVal);
+					if (newVal === false) { this.seed = 0; }
+					else { this.seed = null; }
+				}
+			}
 		},
 		methods: {
 			...mapMutations('imageGenerators',
@@ -150,6 +195,14 @@
 
 			assignParams (field, data) {
 				this.setRequestParameters({ [field]: data });
+			},
+
+			incrementSeed () {
+				this.seed = this.seed + 1;
+			},
+
+			decrementSeed () {
+				this.seed = this.seed - 1;
 			}
 		}
 	};

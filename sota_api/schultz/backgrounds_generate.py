@@ -87,7 +87,7 @@ def generate_images(
             img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
             pil_img = PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB')
             buffered = BytesIO()
-            pil_img.save(f'{outdir}/seed{seed:04d}{random.randint(0,9999999)}.png')
+            # pil_img.save(f'{outdir}/seed{seed:04d}{random.randint(0,9999999)}.png')
             pil_img.save(buffered, format="JPEG")
             img_base64 = base64.b64encode(buffered.getvalue())
             img_base64 = bytes("data:image/jpeg;base64,", encoding='utf-8') + img_base64

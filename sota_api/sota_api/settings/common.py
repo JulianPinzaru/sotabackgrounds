@@ -241,8 +241,10 @@ f = dnnlib.util.open_url(network_pkl_backgrounds)
 BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
 f.close()
 
+# MODEL_PATH_UNIVERSE = pathlib.Path(
+#     "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-2800.pkl")
 MODEL_PATH_UNIVERSE = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-2800.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-fixed-aug-0.5-1720.pkl")
 network_pkl_universe = str(MODEL_PATH_UNIVERSE)
 # DEVICE = torch.device('cpu')
 DEVICE = torch.device('cuda')

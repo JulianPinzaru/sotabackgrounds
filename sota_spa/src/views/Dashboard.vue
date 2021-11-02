@@ -7,7 +7,7 @@
 					<v-btn-toggle
 						rounded
 					>
-						<v-btn :disabled="!getDisplayedImage" x-medium @click="download">
+						<v-btn color="secondary" :disabled="!getDisplayedImage" x-medium @click="download">
 							<v-icon dark>mdi-download</v-icon>
 						</v-btn>
 						<v-btn class="btn-generate" color="primary" x-medium @click="generate">
@@ -15,7 +15,7 @@
 							Generate
 							<v-icon right dark>mdi-fingerprint</v-icon>
 						</v-btn>
-						<v-btn x-medium @click="startEditing">
+						<v-btn color="secondary" x-medium @click="startEditing">
 							<v-icon dark>mdi-palette</v-icon>
 						</v-btn>
 					</v-btn-toggle>
