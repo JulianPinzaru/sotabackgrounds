@@ -1,0 +1,38 @@
+# To run the application in a cloud
+version: '3.1'
+services:
+  rest_api:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: production 
+    container_name: narrativewave_api 
+    volumes:
+    - /${HOME}/data_prod/narrativewave/logs:/data/public/logs
+
+    env_file: ./backend/docker/env_prod
+    ports:
+    - 11030:80
+    networks:
+    - narrativewave_default
+
+  frontend_spa:
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: production 
+    container_name: narrativewave_spa
+
+    env_file: ./frontend/docker/env_prod
+    ports:
+    - 11040:80
+    networks:
+    - narrativewave_spa_default
+
+networks:
+  narrativewave_default:
+  narrativewave_spa_default:

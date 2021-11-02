@@ -28,7 +28,6 @@ class GeneratorView(APIView):
         is_valid = query_serializer.is_valid(raise_exception=False)
 
         if is_valid:
-            print(query_serializer.data)
             response = requests.post(settings.MODEL_DOMAIN + 'model/', data=query_serializer.data)
             result = response.json()
             return Response(result)

@@ -1,0 +1,4 @@
+TARGET=production
+LOGLEVEL=info
+HTTPS=on
+

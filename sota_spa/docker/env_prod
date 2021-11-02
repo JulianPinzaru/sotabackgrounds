@@ -1,0 +1,2 @@
+TARGET=production
+LOGLEVEL=info

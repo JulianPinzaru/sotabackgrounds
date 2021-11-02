@@ -1,0 +1,27 @@
+# To run the entire application locally within docker containers
+version: '3.1'
+services:
+  rest_api:
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: local
+
+    container_name: narrativewave_api 
+
+    env_file: ./backend/docker/env_local
+    ports:
+    - "0.0.0.0:8000:8000"
+
+  frontend_spa:
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: local 
+    container_name: narrativewave_spa
+
+    env_file: ./frontend/docker/env_local
+    ports:
+    - "0.0.0.0:8080:8080"

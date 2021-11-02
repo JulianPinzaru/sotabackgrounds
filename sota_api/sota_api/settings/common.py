@@ -244,7 +244,7 @@ f.close()
 # MODEL_PATH_UNIVERSE = pathlib.Path(
 #     "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-2800.pkl")
 MODEL_PATH_UNIVERSE = pathlib.Path(
-    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-fixed-aug-0.5-1720.pkl")
+    "/home/weex/repos/www/sota-backgrounds/sota_api/schultz/networks/universe1280x768/universe-1280x768-fixed-aug-0.5-2380.pkl")
 network_pkl_universe = str(MODEL_PATH_UNIVERSE)
 # DEVICE = torch.device('cpu')
 DEVICE = torch.device('cuda')
