@@ -15,7 +15,7 @@ from apps.image_inference.serializers import GeneratorRequestSerializer
 class GeneratorView(APIView):
     def get(self, request, *args, **kwargs):
         try:
-            response = requests.get(settings.MODEL_DOMAIN + 'model/')
+            response = requests.get(settings.MODEL_DOMAIN + 'model')
             json_response = json.loads(response.content)
             if json_response.get('running'):
                 return JsonResponse({'running': True}, status=200)
@@ -28,7 +28,7 @@ class GeneratorView(APIView):
         is_valid = query_serializer.is_valid(raise_exception=False)
 
         if is_valid:
-            response = requests.post(settings.MODEL_DOMAIN + 'model/', data=query_serializer.data)
+            response = requests.post(settings.MODEL_DOMAIN + 'model', json=query_serializer.data)
             result = response.json()
             return Response(result)
         else:

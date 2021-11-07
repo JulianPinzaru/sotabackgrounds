@@ -46,7 +46,8 @@ const actions = {
 	generate ({ commit, state, getters, dispatch }) {
 		if (state.isEditing || state.editingImage) { commit('stopEditing'); }
 		return new Promise((resolve, reject) => {
-			this._vm.axios.post('model/', state.requestParameters).then(response => {
+			const data = _.omitBy(state.requestParameters, (v) => _.isUndefined(v) || _.isNull(v)); // clean null entries
+			this._vm.axios.post('model/', data).then(response => {
 				commit('addGeneratedImage', response.data.image);
 				if (getters.generatedImagesExceedLimit(LIMIT_GENERATED_IMAGES)) {
 					commit('removeLastGeneratedImage');

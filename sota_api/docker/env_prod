@@ -1,4 +1,3 @@
 TARGET=production
 LOGLEVEL=info
-HTTPS=on
-
+RUNS_ON_CPU=1

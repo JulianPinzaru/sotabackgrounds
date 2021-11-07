@@ -23,7 +23,7 @@
 <script>
 	import { mapState, mapMutations } from 'vuex';
 	export default {
-		name: 'SecondaryTray',
+		name: 'NavRight',
 		data () {
 			return {
 				isTrayOpened: true,

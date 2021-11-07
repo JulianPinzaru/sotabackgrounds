@@ -7,15 +7,15 @@
 					<v-btn-toggle
 						rounded
 					>
-						<v-btn color="secondary" :disabled="!getDisplayedImage" x-medium @click="download">
+						<v-btn  :disabled="!getDisplayedImage" x-medium @click="download">
 							<v-icon dark>mdi-download</v-icon>
 						</v-btn>
-						<v-btn class="btn-generate" color="primary" x-medium @click="generate">
+						<v-btn ref="generate-btn" class="btn-generate" color="primary" x-medium @click="generate">
 							<v-icon left dark>mdi-fingerprint</v-icon>
 							Generate
 							<v-icon right dark>mdi-fingerprint</v-icon>
 						</v-btn>
-						<v-btn color="secondary" x-medium @click="startEditing">
+						<v-btn x-medium @click="startEditing">
 							<v-icon dark>mdi-palette</v-icon>
 						</v-btn>
 					</v-btn-toggle>
@@ -46,6 +46,7 @@
 				editingImage: null
 			};
 		},
+
 		computed: {
 			...mapState('imageGenerators', {
 				requestParameters: 'requestParameters'
@@ -59,6 +60,13 @@
 			editingImageName () {
 				return `edited-image-${this.requestParameters.network}-${this.requestParameters.truncation_psi}.png`;
 			}
+		},
+		mounted () {
+			document.addEventListener('keydown', this.spacePressed);
+		},
+
+		destroyed () {
+			document.removeEventListener('keydown', this.spacePressed);
 		},
 
 		methods: {
@@ -79,6 +87,11 @@
 			},
 			stopEditing () {
 				this.editingImage = null;
+			},
+			spacePressed (e) {
+				if (e.code === 'Space') {
+					this.$refs['generate-btn'].$el.click();
+				}
 			}
 		}
 	};

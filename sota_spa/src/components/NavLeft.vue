@@ -75,7 +75,7 @@
 	import { mapMutations, mapGetters, mapState } from 'vuex';
 
 	export default {
-		name: 'MainTray',
+		name: 'NavLeft',
 		data () {
 			return {
 				isTrayOpened: true,
@@ -183,7 +183,6 @@
 					return this.seed === null;
 				},
 				set (newVal) {
-					console.log(newVal);
 					if (newVal === false) { this.seed = 0; }
 					else { this.seed = null; }
 				}

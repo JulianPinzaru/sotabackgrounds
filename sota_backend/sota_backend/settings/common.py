@@ -132,7 +132,7 @@ STATIC_URL = '/api/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = ROOT_DIR / 'public' / 'static'
-STATICFILES_DIRS = [ROOT_DIR / 'private' / 'static' ]
+STATICFILES_DIRS = [ROOT_DIR / 'private' / 'static']
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = ROOT_DIR / 'public' / 'media'
@@ -194,14 +194,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
-    ),
-    'DEFAULT_THROTTLE_RATES': { # 86,400 seconds in a day
-        'anon': '20/minute',
-        'user': '10000/day',
-    },
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle'
+    # ),
+    # 'DEFAULT_THROTTLE_RATES': { # 86,400 seconds in a day
+    #     'anon': '20/minute',
+    #     'user': '10000/day',
+    # },
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 

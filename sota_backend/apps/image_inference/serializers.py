@@ -23,7 +23,7 @@ class GeneratorRequestSerializer(serializers.Serializer):
         default=generate_default_seed,
         child=serializers.IntegerField(min_value=0, max_value=65536),
         required=False,
-        allow_null=True
+        allow_null=False
     )
     truncation_psi = serializers.FloatField(min_value=-3.0, max_value=3.0)
     noise_mode = serializers.ChoiceField(choices=NOISE_CHOICES, default='none')

@@ -36,18 +36,6 @@ def num_range(s: str) -> List[int]:
 def valmap(value, istart, istop, ostart, ostop):
     return ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
 
-# ----------------------------------------------------------------------------
-
-# @click.command()
-# @click.pass_context
-# @click.option('--class', 'class_idx', type=int, help='Class label (unconditional if not specified)')
-# @click.option('--noise-mode', help='Noise mode', type=click.Choice(['const', 'random', 'none']), default='const',
-#               show_default=True)
-# @click.option('--outdir', help='Where to save the output images', type=str, required=True, metavar='DIR')
-# @click.option('--process', type=click.Choice(['image', 'interpolation', 'truncation']), default='image',
-#               help='generation method', required=True)
-# @click.option('--seeds', type=num_range, help='List of random seeds')
-# @click.option('--trunc', 'truncation_psi', type=float, help='Truncation psi', default=1, show_default=True)
 def generate_images(
         device,
         generator,
@@ -59,6 +47,7 @@ def generate_images(
         noise_mode: str,
         outdir: str,
         class_idx: Optional[int],
+        is_cpu: Optional[bool] = False
     ):
 
     G = generator
@@ -68,7 +57,7 @@ def generate_images(
     label = torch.zeros([1, G.c_dim], device=device)
     if G.c_dim != 0:
         if class_idx is None:
-            return 'Must specify class label with --class when using a conditional network'
+            raise Exception('Must specify class label with --class when using a conditional network')
         label[:, class_idx] = 1
     else:
         if class_idx is not None:
@@ -76,14 +65,13 @@ def generate_images(
 
     if (process == 'image'):
         if seeds is None:
-            return '--seeds option is required when not using --projected-w'
+            raise Exception('--seeds option is required when not using --projected-w')
 
         # Generate images.
         for seed_idx, seed in enumerate(seeds):
             print('Generating image for seed %d (%d/%d) ...' % (seed, seed_idx, len(seeds)))
             z = torch.from_numpy(np.random.RandomState(seed).randn(1, G.z_dim)).to(device)
-            # img = G(z, label, truncation_psi=truncation_psi, noise_mode=noise_mode, force_fp32=True)
-            img = G(z, label, truncation_psi=truncation_psi, noise_mode=noise_mode)
+            img = G(z, label, truncation_psi=truncation_psi, noise_mode=noise_mode, force_fp32=is_cpu) # fp32 for AMD cpu
             img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
             pil_img = PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB')
             buffered = BytesIO()

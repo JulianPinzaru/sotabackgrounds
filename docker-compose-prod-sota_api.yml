@@ -1,0 +1,22 @@
+# To run the application in a cloud
+version: '3.1'
+services:
+  sota_api:
+    restart: always
+    build:
+      context: ./sota_api
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: production 
+    container_name: sota_api 
+    volumes:
+    - /${HOME}/data_prod/sota_api/logs:/data/public/logs
+
+    env_file: ./sota_api/docker/env_prod
+    ports:
+    - 8001:80
+    networks:
+    - sota_api_default
+
+networks:
+  sota_api_default:
