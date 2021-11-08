@@ -1,7 +1,7 @@
 <template>
 	<v-container fluid>
 		<template v-if="!isEditing">
-			<image-area :image="getDisplayedImage" />
+			<image-area :image="getDisplayedImage" :is-loading="isLoading"/>
 			<div class="bottom-area">
 				<div class="generate btn-group">
 					<v-btn-toggle
@@ -49,7 +49,8 @@
 
 		computed: {
 			...mapState('imageGenerators', {
-				requestParameters: 'requestParameters'
+				requestParameters: 'requestParameters',
+				isLoading: 'isLoading'
 			}),
 			...mapGetters('imageGenerators', {
 				getDisplayedImage: 'getDisplayedImage'

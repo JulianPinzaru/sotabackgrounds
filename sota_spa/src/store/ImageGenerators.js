@@ -25,6 +25,7 @@ const state = {
 		class_idx: null,
 		noise_mode: 'random'
 	},
+	isLoading: false,
 	isEditing: false,
 	editingImage: null
 };
@@ -45,6 +46,7 @@ const actions = {
 
 	generate ({ commit, state, getters, dispatch }) {
 		if (state.isEditing || state.editingImage) { commit('stopEditing'); }
+		commit('startLoading');
 		return new Promise((resolve, reject) => {
 			const data = _.omitBy(state.requestParameters, (v) => _.isUndefined(v) || _.isNull(v)); // clean null entries
 			this._vm.axios.post('model/', data).then(response => {
@@ -53,7 +55,11 @@ const actions = {
 					commit('removeLastGeneratedImage');
 				}
 				dispatch('setDisplayedImage', response.data.image);
+				commit('stopLoading');
 				resolve(response.data.image);
+			}).catch((error) => {
+				commit('stopLoading');
+				reject(error);
 			});
 		});
 	},
@@ -99,6 +105,12 @@ const mutations = {
 	},
 	setEditingImage (state, image) {
 		state.editingImage = image;
+	},
+	startLoading (state) {
+		state.isLoading = true;
+	},
+	stopLoading (state) {
+		state.isLoading = false;
 	}
 };
 
