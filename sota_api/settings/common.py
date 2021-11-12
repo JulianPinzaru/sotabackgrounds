@@ -10,10 +10,13 @@ import dnnlib
 import legacy
 import training.augment
 
-RUN_ON_CPU = os.getenv("RUN_ON_CPU", True)
+RUN_ON_CPU = os.getenv('RUN_ON_CPU', False)
+
+# MODEL_PATH_BACKGROUNDS = pathlib.Path(
+# 	'./schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-1280.pkl')
 
 MODEL_PATH_BACKGROUNDS = pathlib.Path(
-	"./schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-1280.pkl")
+	'./schultz/networks/backgrounds1280x768/backgrounds1280x768_aug_0.5-1840.pkl')
 
 network_pkl_backgrounds = str(MODEL_PATH_BACKGROUNDS)
 print('Loading networks from "%s"...' % network_pkl_backgrounds)
@@ -27,7 +30,7 @@ f = dnnlib.util.open_url(network_pkl_backgrounds)
 BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
 f.close()
 MODEL_PATH_UNIVERSE = pathlib.Path(
-	"./schultz/networks/universe1280x768/universe-1280x768-fixed-aug-0.5-3020.pkl")
+	'./schultz/networks/universe1280x768/universe-1280x768-fixed-aug-0.5-3020.pkl')
 network_pkl_universe = str(MODEL_PATH_UNIVERSE)
 
 

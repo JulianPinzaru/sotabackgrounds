@@ -8,9 +8,11 @@ services:
       dockerfile: docker/Dockerfile
       args:
         TARGET: production 
-    container_name: sota_api 
+        RUN_ON_CPU: 1 
+    container_name: sota_api_amd
     volumes:
     - /${HOME}/data_prod/sota_api/logs:/data/public/logs
+    - ./sota_api/schultz/networks/:/data/networks/
 
     env_file: ./sota_api/docker/env_prod
     ports:

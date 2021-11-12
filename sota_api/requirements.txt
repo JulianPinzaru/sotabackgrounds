@@ -11,5 +11,5 @@ click
 opensimplex
 requests
 scipy
-ipytwidgets
+ipywidgets
 uvicorn[standard]
