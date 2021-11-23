@@ -2,14 +2,14 @@
 version: '3.1'
 services:
   sota_api:
-    restart: always
+    restart: unless-stopped 
     build:
       context: ./sota_api
       dockerfile: docker/Dockerfile
       args:
         TARGET: production 
-        RUN_ON_CPU: 1 
-    container_name: sota_api_amd
+        # RUN_ON_CPU: 0 
+    container_name: sota_api_gpu
     volumes:
     - /${HOME}/data_prod/sota_api/logs:/data/public/logs
     - ./sota_api/schultz/networks/:/data/networks/
@@ -19,6 +19,13 @@ services:
     - 8001:80
     networks:
     - sota_api_default
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 networks:
   sota_api_default:

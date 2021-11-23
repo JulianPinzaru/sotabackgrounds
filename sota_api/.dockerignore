@@ -1,0 +1,14 @@
+docker/env_local
+docker/env_prod
+docker/Dockerfile_AMD
+docker/Dockerfile
+schultz/networks
+schultz/out
+schultz/raw_datasets
+schultz/docs
+**/__pycache__
+**/venv
+**/.idea
+*.md
+*.log
+*.ipynb

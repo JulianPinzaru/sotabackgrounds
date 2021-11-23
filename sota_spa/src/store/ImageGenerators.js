@@ -90,6 +90,7 @@ const mutations = {
 	},
 	setRequestParameters (state, params) {
 		if (params.network === 'backgrounds_generator' && state.requestParameters.class_idx === null) { params.class_idx = 0; }
+		if (params.network === 'universe_generator' && state.requestParameters.class_idx !== null) { params.class_idx = null; }
 		state.requestParameters = _.extend({}, state.requestParameters, params);
 	},
 	resetRequestParameters (state) {

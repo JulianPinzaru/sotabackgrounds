@@ -13,3 +13,4 @@ requests
 scipy
 ipywidgets
 uvicorn[standard]
+fastapi
