@@ -2,10 +2,6 @@ FROM nvcr.io/nvidia/pytorch:20.12-py3
 
 LABEL maintainer="wx"
 
-RUN groupadd -g 999 appuser && \
-    useradd -r -u 999 -g appuser appuser
-USER appuser
-
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -40,6 +36,10 @@ COPY . /workspace
 RUN mkdir -p ./public/logs
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser
+USER appuser
 
 EXPOSE 80
 CMD ["sh", "./docker/entrypoint.sh"]
