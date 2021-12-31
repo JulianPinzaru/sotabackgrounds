@@ -41,14 +41,15 @@ module.exports = {
 	},
 	devServer: {
 		disableHostCheck: true, //for ngrok
-		// proxy: {
-		// 	'/model/': {
-		// 		target: 'http://localhost:8000',
-		// 		ws: true,
-		// 		changeOrigin: true,
-		// 		logLevel: 'debug',
-		// 	}
-		// }
+		proxy: {
+		 	'/api/': {
+		 		target: 'http://sotabackgrounds:8000/',
+		 		pathRewrite: {'^/api' : '/'},
+		 		ws: true,
+		 		changeOrigin: true,
+		 		logLevel: 'debug',
+		 	}
+		 }
 	}
 };
 

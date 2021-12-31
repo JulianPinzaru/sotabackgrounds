@@ -22,7 +22,7 @@ dictConfig(LogConfig(LOG_LEVEL=LOG_LEVEL).dict())
 RUN_ON_CPU = os.getenv('RUN_ON_CPU', False)
 
 MODEL_PATH_BACKGROUNDS = pathlib.Path(
-    './schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-2820.pkl')
+    './schultz/networks/backgrounds1280x768/backgrounds1280x768-1280x768-3740.pkl')
 
 network_pkl_backgrounds = str(MODEL_PATH_BACKGROUNDS)
 print('Loading networks from "%s"...' % network_pkl_backgrounds)
@@ -36,7 +36,7 @@ f = dnnlib.util.open_url(network_pkl_backgrounds)
 BACKGROUNDS_MODEL = legacy.load_network_pkl(f)['G_ema'].to(DEVICE)  # type: ignore
 f.close()
 MODEL_PATH_UNIVERSE = pathlib.Path(
-    './schultz/networks/universe1280x768/universe-1280x768-3420.pkl')
+    './schultz/networks/universe1280x768/universe-1280x768-2800.pkl')
 network_pkl_universe = str(MODEL_PATH_UNIVERSE)
 
 
